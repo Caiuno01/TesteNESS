@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UsuarioModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <a class="btn btn-info" asp-action="Novo">Inserir Novo Usuário</a>
+    </div>
+    <hr /><br />
+    @if (!String.IsNullOrEmpty((String)TempData["mensagem"]))
+    {
+        <div class="alert alert-success" role="alert">
+            <h4>@TempData["mensagem"]</h4>
+        </div>
+    }
+    <div class="card">
+        <h3 class="card-header">Usuários</h3>
+        <div class="card-body">
+            <table class="table table-striped col-md-6">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>Nome</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var usuario in Model)
+                    {
+                        <tr>
+                            <td>@usuario.Nome</td>
+                            <td>
+                                <a class="btn btn-success" asp-action="Detalhes"
+                                   asp-route-id="@usuario.IdUsuario">Detalhes</a>
+                                <a class="btn btn-primary" asp-action="Editar"
+                                   asp-route-id="@usuario.IdUsuario">Editar</a>
+                                <a class="btn btn-danger" asp-action="Apagar"
+                                   asp-route-id="@usuario.IdUsuario">Apagar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
