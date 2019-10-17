@@ -20,11 +20,11 @@ namespace TesteNESS.Models
         public string Nome { get; set; }
         [Display(Name = "CPF:")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "O CPF é obrigatório")]
-        [StringLength(14, MinimumLength = 14, ErrorMessage = "O CPF deve ter 14 caracteres")]
+        [StringLength(14, MinimumLength = 11, ErrorMessage = "O CPF deve ter entre 11 (sem pontuação) e 14 (com pontuação) caracteres")]
         public string Cpf { get; set; }
         [Display(Name = "Telefone:")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "O telefone é obrigatório")]
-        [StringLength(19, MinimumLength = 9, ErrorMessage = "O telefone deve ter entre 9 e 19 caracteres")]
+        [StringLength(19, MinimumLength = 8, ErrorMessage = "O telefone deve ter entre 8 e 19 caracteres")]
         public string Telefone { get; set; }
     }
 }
