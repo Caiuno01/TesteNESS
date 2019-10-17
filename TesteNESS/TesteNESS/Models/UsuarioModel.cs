@@ -24,7 +24,7 @@ namespace TesteNESS.Models
         public string Cpf { get; set; }
         [Display(Name = "Telefone:")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "O telefone é obrigatório")]
-        [StringLength(19, MinimumLength = 15, ErrorMessage = "O telefone deve ter entre 15 e 19 caracteres")]
+        [StringLength(19, MinimumLength = 9, ErrorMessage = "O telefone deve ter entre 9 e 19 caracteres")]
         public string Telefone { get; set; }
     }
 }

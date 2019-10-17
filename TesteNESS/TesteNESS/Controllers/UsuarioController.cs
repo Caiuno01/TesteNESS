@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TesteNESS.Business;
 using TesteNESS.Models;
 using TesteNESS.Repositories;
 
@@ -10,17 +11,17 @@ namespace TesteNESS.Controllers
 {
     public class UsuarioController : Controller
     {
-        public UsuarioRepository repository { get; set; }
+        private readonly UsuarioBusiness business;
 
         public UsuarioController()
         {
-            repository = new UsuarioRepository();
+            business = new UsuarioBusiness();
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            IList<UsuarioModel> usuarios = repository.FindAll();
+            IList<UsuarioModel> usuarios = business.FindAll();
             return View(usuarios);
         }
 
@@ -35,7 +36,7 @@ namespace TesteNESS.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Insert(usuario);
+                business.Insert(usuario);
                 TempData["mensagem"] = "Usuário inserido com sucesso!";
                 return RedirectToAction("Index","Usuario");
             } else
@@ -47,13 +48,13 @@ namespace TesteNESS.Controllers
         [HttpGet]
         public IActionResult Detalhes(int id)
         {
-            return View(repository.FindById(id));
+            return View(business.FindById(id));
         }
 
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            return View(repository.FindById(id));
+            return View(business.FindById(id));
         }
 
         [HttpPost]
@@ -61,7 +62,7 @@ namespace TesteNESS.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Update(usuario);
+                business.Update(usuario);
                 TempData["mensagem"] = "Usuário alterado com sucesso!";
                 return RedirectToAction("Index", "Usuario");
             }
@@ -74,7 +75,7 @@ namespace TesteNESS.Controllers
         [HttpGet]
         public IActionResult Apagar(int id)
         {
-            repository.Delete(id);
+            business.Delete(id);
             TempData["mensagem"] = "Usuário apagado com sucesso!";
             return RedirectToAction("Index", "Usuario");
         }
